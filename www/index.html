@@ -195,6 +195,10 @@
         var audio = new Audio();
         audio.src = "pin.wav";
         audio.play();
+        active = false;
+        period = 60 * parseInt( $("#minute").val())+parseInt($("#second").val());
+        $("#time").html("経過時間： 0");
+        $("#remain").html("残り時間： " + period);
     }
     
  
