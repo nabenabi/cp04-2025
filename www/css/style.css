@@ -70,4 +70,7 @@
     body{
         background-color: skyblue;
     }
+    button{
+        background-color: blue;
+    }
     input[type=number] {text-align: right;}
