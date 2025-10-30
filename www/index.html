@@ -179,7 +179,14 @@
     
     // ButtonAがクリックされた時の処理
     function btnAClick(e){
-        btnCClick(e);
+        alarm();
+        var audio = new Audio();
+        audio.src = "pin.wav";
+        audio.play();
+        active = false;
+        period = 60 * parseInt( $("#minute").val())+parseInt($("#second").val());
+        $("#time").html("経過時間： 0");
+        $("#remain").html("残り時間： " + period);
         active = true;
         startTime = new Date();
     }
@@ -192,14 +199,13 @@
 
     // ButtonCがクリックされた時の処理
     function btnCClick(e){
-        alarm();
-        var audio = new Audio();
-        audio.src = "pin.wav";
-        audio.play();
         active = false;
-        period = 60 * parseInt( $("#minute").val())+parseInt($("#second").val());
-        $("#time").html("経過時間： 0");
-        $("#remain").html("残り時間： " + period);
+        startTime = 0;
+        period = 0;
+        rest = 0;
+        etime = 0;
+        $("#time").html("経過時間： " + etime);
+        $("#remain").html("残り時間： " + rest);
     }
     
  
@@ -211,8 +217,13 @@
             $("#time").html("経過時間： " + etime);
             $("#remain").html("残り時間： " + rest);
             analog(rest);
+            $("#times").hide();
         }     
-        if (rest <= 0) {  active = false;  alarm}   
+        if (rest <= 0) { 
+            active = false;
+            $("#times").show();
+            alarm();
+            }   
     } 
 
   </script>
@@ -227,8 +238,10 @@
     <div id="time">Time</div>
     <button id="btnA">Start</button>  
     <button id="btnB">Stop</button>  
-    <button id="btnC">Set</button>  
-    <input type="number" id="minute" value=0 >
-    <input type="number" id="second" value=15 >
+    <button id="btnC">Reset</button> 
+    <div id="times">
+        <input type="number" id="minute" value=0 >
+        <input type="number" id="second" value=15 >
+    </div>
 </body>
 </html>
